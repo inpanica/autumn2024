@@ -38,3 +38,23 @@
         left: -20px;
     }
 }
+
+.interess-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.interess-wrapper > * {
+    flex: 1 1 45%;
+    text-align: left;
+}
+
+@media (max-width: 600px) {
+    .interess-wrapper {
+        flex-direction: column;
+    }
+    .interess-wrapper > * {
+        flex: 1 1 100%;
+    }
+}

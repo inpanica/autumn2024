@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Card from '../Card/Card';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
+import Checkbox from '../CheckBox/CheckBox';
 import { FaEdit, FaCheck, FaTimes, FaSignOutAlt } from 'react-icons/fa';
 import './Profile.css';
 import { config } from '../../config';
@@ -82,7 +83,18 @@ const Profile = ({ user, setUser, onUpdateProfile }) => {
             </Card>
             <Card maxWidth={500}>
                 <h2 className="main-title">Интересы</h2>
-
+                <div className="interess-wrapper">
+                    <Checkbox>Спорт</Checkbox>
+                    <Checkbox>Кулинария</Checkbox>
+                    <Checkbox>Музыка</Checkbox>
+                    <Checkbox>Рисование</Checkbox>
+                    <Checkbox>Кино</Checkbox>
+                    <Checkbox>Животные</Checkbox>
+                    <Checkbox>Технологии</Checkbox>
+                    <Checkbox>Общение</Checkbox>
+                    <Checkbox>Игры</Checkbox>
+                    <Checkbox>Литература</Checkbox>
+                </div>
             </Card>
             <Card maxWidth={500}>
                 <h2 className="main-title">Достижения</h2>
