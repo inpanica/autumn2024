@@ -1,0 +1,38 @@
+.input-container {
+    position: relative;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.input {
+    padding: 10px;
+    background-color: #323131;
+    border: none;
+    border-radius: 8px;
+    color: #D0D0D0;
+    font-size: 16px;
+    transition: all 0.05s;
+    width: auto;
+    outline: none;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.input-label {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-size: 16px;
+    color: #aaa;
+    transition: 0.2s;
+    cursor: text; /* Устанавливаем курсор текстом */
+}
+
+.input-container.focused .input-label {
+    top: -20px;
+    left: 10px;
+    font-size: 14px;
+    color: #D0D0D0;
+}

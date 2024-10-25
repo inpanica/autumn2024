@@ -1,0 +1,28 @@
+.btn {
+    position: relative;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all .2s;
+    cursor: pointer;
+    box-shadow: 0px 5px 4px rgba(52, 51, 51, 0.2);
+    background-color: #505050;
+    color: #D0D0D0;
+    width: max-content;
+    margin-bottom: 20px;
+}
+
+.colored-btn{
+    background: linear-gradient(45deg, #FFED00, #FDC200);
+    color: #313030;
+}
+
+.btn:hover {
+    box-shadow: 0px 10px 20px rgba(52, 51, 51, 0.5);
+}
+
+.full-width-btn {
+    width: 100%; /* Устанавливаем ширину 100% */
+}

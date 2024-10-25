@@ -1,0 +1,14 @@
+.photo-container {
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+}
+
+.photo-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
