@@ -59,3 +59,9 @@
         flex: 1 1 100%;
     }
 }
+
+
+.user-points-wrapper{
+    display: flex;
+    align-items: center;
+}

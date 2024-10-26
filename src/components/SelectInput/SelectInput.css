@@ -1,0 +1,35 @@
+.select-input-container {
+    position: relative;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.select-input {
+    padding: 10px;
+    background-color: #323131;
+    border: none;
+    border-radius: 8px;
+    color: #D0D0D0;
+    font-size: 16px;
+    transition: all 0.05s;
+    width: auto;
+    outline: none;
+    appearance: none; /* Убираем стандартный стиль селекта */
+}
+
+.select-input-label {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-size: 16px;
+    color: #aaa;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.select-input-container.focused .select-input-label {
+    top: -20px;
+    left: 10px;
+    font-size: 14px;
+    color: #D0D0D0;
+}

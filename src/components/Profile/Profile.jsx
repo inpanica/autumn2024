@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '../Card/Card';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -7,14 +7,60 @@ import { FaEdit, FaCheck, FaTimes, FaSignOutAlt } from 'react-icons/fa';
 import './Profile.css';
 import { config } from '../../config';
 import { removeTokens } from '../../jwt';
+import { getInterests, getLevel, patchInterests } from '../../levelActions';
+import Lemon from '../Lemon/Lemon';
 
 const Profile = ({ user, setUser, onUpdateProfile }) => {
+
     const [isEditing, setIsEditing] = useState(false);
     const [name, setName] = useState(user.name);
     const [surname, setSurname] = useState(user.surname);
     const [email] = useState(user.email);
     const [photo, setPhoto] = useState(user.photo);
     const [password, setPassword] = useState('');
+
+    const [level, setLevel] = useState(0);
+
+    const [interests, setInterests] = useState({
+        "sport": false,
+        "cooking": false,
+        "art": false,
+        "tech": false,
+        "communication": false,
+        "literature": false,
+        "animals": false,
+        "games": false,
+        "music": false,
+        "films": false
+    })
+
+    const handleCheckboxChange = async (interest) => {
+        setInterests((prevInterests) => ({
+            ...prevInterests,
+            [interest]: !prevInterests[interest],
+        }));
+        const response = await patchInterests({[interest]: !interests[interest]});
+    };
+
+    useEffect(() => {
+        getMyInterests();
+    }, [])
+
+    useEffect(() => {
+        getMyLevel();
+    }, [user])
+
+    const getMyLevel = async () => {
+        const response = await getLevel();
+        setLevel(response.data.level)
+    }
+
+    const getMyInterests = async () => {
+        const response = await getInterests();
+        if (response.status === 200){
+            setInterests(response.data[0]);
+        }
+    }
 
     const handleEditToggle = () => {
         setIsEditing(!isEditing);
@@ -84,20 +130,73 @@ const Profile = ({ user, setUser, onUpdateProfile }) => {
             <Card maxWidth={500}>
                 <h2 className="main-title">Интересы</h2>
                 <div className="interess-wrapper">
-                    <Checkbox>Спорт</Checkbox>
-                    <Checkbox>Кулинария</Checkbox>
-                    <Checkbox>Музыка</Checkbox>
-                    <Checkbox>Рисование</Checkbox>
-                    <Checkbox>Кино</Checkbox>
-                    <Checkbox>Животные</Checkbox>
-                    <Checkbox>Технологии</Checkbox>
-                    <Checkbox>Общение</Checkbox>
-                    <Checkbox>Игры</Checkbox>
-                    <Checkbox>Литература</Checkbox>
+                    <Checkbox
+                        checked={interests.sport}
+                        onChange={() => handleCheckboxChange('sport')}
+                    >
+                        Спорт
+                    </Checkbox>
+                    <Checkbox
+                        checked={interests.cooking}
+                        onChange={() => handleCheckboxChange('cooking')}
+                    >
+                        Кулинария
+                    </Checkbox>
+                    <Checkbox
+                        checked={interests.art}
+                        onChange={() => handleCheckboxChange('art')}
+                    >
+                        Рисование
+                    </Checkbox>
+                    <Checkbox
+                        checked={interests.tech}
+                        onChange={() => handleCheckboxChange('tech')}
+                    >
+                        Технологии
+                    </Checkbox>
+                    <Checkbox
+                        checked={interests.communication}
+                        onChange={() => handleCheckboxChange('communication')}
+                    >
+                        Общение
+                    </Checkbox>
+                    <Checkbox
+                        checked={interests.literature}
+                        onChange={() => handleCheckboxChange('literature')}
+                    >
+                        Литература
+                    </Checkbox>
+                    <Checkbox
+                        checked={interests.animals}
+                        onChange={() => handleCheckboxChange('animals')}
+                    >
+                        Животные
+                    </Checkbox>
+                    <Checkbox
+                        checked={interests.games}
+                        onChange={() => handleCheckboxChange('games')}
+                    >
+                        Игры
+                    </Checkbox>
+                    <Checkbox
+                        checked={interests.music}
+                        onChange={() => handleCheckboxChange('music')}
+                    >
+                        Музыка
+                    </Checkbox>
+                    <Checkbox
+                        checked={interests.films}
+                        onChange={() => handleCheckboxChange('films')}
+                    >
+                        Кино
+                    </Checkbox>
                 </div>
             </Card>
             <Card maxWidth={500}>
                 <h2 className="main-title">Достижения</h2>
+                <p className="main-text user-points-wrapper">Счёт: {user.points}<Lemon></Lemon></p>
+                <p className="main-text no-margin">Уровень {level}</p>
+                <p className="main-desc">{config.roles[level]}</p>
             </Card>
             <Card maxWidth={500}>
                 <h2 className="main-title">Подключить Google Fit</h2>

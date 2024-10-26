@@ -1,24 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Input from '../Input/Input';
-import PhotoInput from '../PhotoInput/PhotoInput';
 import Button from '../Button/Button';
 import Card from '../Card/Card';
-import skeletonImage from '../../assets/sceleton.png';
 import Error from '../Error/Errror';
 import { loginUser, registerUser, setUserPhoto } from '../../actions';
-import { saveTokens } from '../../jwt';
 
 
-const RegistrationForm = ({authByToken}) => {
+const AddAdmin = ({}) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [team, setTeam] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [photo, setPhoto] = useState(skeletonImage);
-    const [file, setFile] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -44,11 +38,6 @@ const RegistrationForm = ({authByToken}) => {
             return;
         }
 
-        else if (!team) {
-            setErrorMessage('Введите команду разработки.');
-            return;
-        }
-
         else if (password.length < 6) {
             setErrorMessage('Пароль должен содержать не менее 6 символов.');
             return;
@@ -64,32 +53,20 @@ const RegistrationForm = ({authByToken}) => {
                 "name": firstName,
                 "surname": lastName,
                 "email": email,
-                "team": team,
                 "password": password,
+                "is_admin": true
             }
-            const dataString = JSON.stringify(data);
             const formData = new FormData();
-            formData.append('photo', file);
             const response = await registerUser(data, formData);
-            console.log(response);
-            
-            if (response.status === 201) {
-                const loginResponse = await loginUser(email, password);
-                if (loginResponse.status == 201) {
-                    saveTokens(loginResponse.data.refresh, loginResponse.data.access);
-                    const photoResponse = await setUserPhoto(formData);
-                    console.log(photoResponse);
-                    console.log(file);
-                    authByToken();
-                    
-                }
+            if (response.status === 201){
+                alert("Админ успешно добавлен!")
+                setEmail('');
+                setLastName('');
+                setFirstName('');
+                setPassword('');
+                setRepeatPassword('');
             }
         }
-    };
-
-
-    const handlePhotoChange = (newPhoto) => {
-        setPhoto(newPhoto);
     };
 
     useEffect(() => {
@@ -100,8 +77,7 @@ const RegistrationForm = ({authByToken}) => {
         <div className="ctn">
 
             <Card maxWidth={500}>
-                <h2 className="main-title">Регистрация</h2>
-                <PhotoInput setFile={setFile} onPhotoChange={handlePhotoChange} />
+                <h2 className="main-title">Добавить админа</h2>
                 <Input
                     fullWidth={true}
                     placeholder="Имя"
@@ -126,14 +102,6 @@ const RegistrationForm = ({authByToken}) => {
                 />
                 <Input
                     fullWidth={true}
-                    placeholder="Команда"
-                    value={team}
-                    onChange={(e) => setTeam(e.target.value)}
-                    type="text"
-                    required
-                />
-                <Input
-                    fullWidth={true}
                     placeholder="Пароль"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -149,10 +117,10 @@ const RegistrationForm = ({authByToken}) => {
                     required
                 />
                 <Error>{errorMessage}</Error>
-                <Button colored={true} fullWidth={true} onClick={handleSubmit}>Зарегистрироваться</Button>
+                <Button colored={true} fullWidth={true} onClick={handleSubmit}>Подвердить</Button>
             </Card>
         </div>
     );
 };
 
-export default RegistrationForm;
+export default AddAdmin;

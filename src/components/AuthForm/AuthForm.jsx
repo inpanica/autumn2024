@@ -6,7 +6,7 @@ import './AuthForm.css'
 import { loginUser } from '../../actions';
 import { saveTokens } from '../../jwt';
 
-const AuthForm = () => {
+const AuthForm = ({authByToken}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 

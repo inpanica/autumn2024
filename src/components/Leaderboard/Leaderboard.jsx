@@ -12,21 +12,9 @@ const Leaderboard = ({ user, setUser, allUsers, setAllUsers }) => {
         loadUsers();
     }, []);
 
-    useEffect(() => {
-        loadLevels();
-    }, [allUsers])
-
-    const loadLevels = async () => {
-        newUsers = allUsers.map(({ id_u, photo, name, surname, email, points }, index) => {
-            
-            return 0;
-        })
-        const response = await getAllUsers();
-        setAllUsers(response.data);
-    };
-
     const loadUsers = async () => {
         const response = await getAllUsers();
+        console.log(response.data);
         setAllUsers(response.data);
     };
 
@@ -37,7 +25,7 @@ const Leaderboard = ({ user, setUser, allUsers, setAllUsers }) => {
                 <div className="leaderboard-table">
                     {allUsers
                         .sort((a, b) => b.points - a.points)
-                        .map(({ id_u, photo, name, surname, email, points }, index) => (
+                        .map(({ id_u, photo, name, surname, email, points, id_l }, index) => (
                             <UserRow
                                 key={id_u}
                                 position={index + 1}
@@ -46,6 +34,7 @@ const Leaderboard = ({ user, setUser, allUsers, setAllUsers }) => {
                                 surname={surname}
                                 email={email}
                                 points={points}
+                                id_l={id_l}
                             />
                         ))}
                 </div>
@@ -54,7 +43,7 @@ const Leaderboard = ({ user, setUser, allUsers, setAllUsers }) => {
     );
 };
 
-const UserRow = ({ position, photo, name, surname, email, points }) => (
+const UserRow = ({ position, photo, name, surname, email, points, id_l }) => (
     <div className="user-row">
         <div className="main-title position">{position}</div>
         {position <= 3 && <img className='leader-fire' src={fire} />}
@@ -62,7 +51,8 @@ const UserRow = ({ position, photo, name, surname, email, points }) => (
         <p className="main-text user-name-leader">{name + ' ' + surname}</p>
         <p className="main-text user-points">{points} <Lemon></Lemon></p>
         <div className="level-ctn">
-            <p className="main-text">Уровень</p>
+            <p className="main-text user_level-leaderboard">Уровень {id_l}</p>
+            <p className="main-desc user_level-leaderboard">{config.roles[id_l]}</p>
         </div>
     </div>
 );

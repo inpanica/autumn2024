@@ -1,0 +1,104 @@
+.react-datepicker {
+    background-color: #323131; /* Темный фон для всего календаря */
+    border: 1px solid #555; /* Темная рамка */
+    border-radius: 8px;
+    color: #D0D0D0; /* Основной цвет текста */
+}
+
+/* Заголовок календаря */
+.react-datepicker__header, .react-datepicker-time__header{
+    background-color: #444; /* Темный фон для заголовка */
+    border-bottom: 1px solid #555; /* Темная граница снизу */
+    color: #FFD700; /* Цвет текста заголовка теперь желтый */
+}
+
+.react-datepicker__time-list-item--selected{
+    color: #FFD700;
+}
+
+/* Месяц и год */
+.react-datepicker__current-month {
+    color: #D0D0D0; /* Цвет для месяца */
+}
+
+/* Дни месяца */
+.react-datepicker__day {
+    color: #D0D0D0; /* Цвет для обычных дней */
+}
+
+/* Выбранные и наведенные дни */
+.react-datepicker__day--selected,
+.react-datepicker__day:hover {
+    background-color: #FFD700; /* Желтый фон для выделенных дней */
+    color: #323131; /* Цвет текста для выделенных дней */
+}
+
+/* Дни, не входящие в текущий месяц */
+.react-datepicker__day--outside-month {
+    color: #777; /* Более светлый цвет для дней, не входящих в текущий месяц */
+}
+
+/* Время */
+.react-datepicker__time-container {
+    background-color: #444; /* Фон для выбора времени */
+}
+
+.react-datepicker__time {
+    color: #D0D0D0; /* Цвет текста времени */
+}
+
+.react-datepicker__time-box {
+    background-color: #323131; /* Фон для блока времени */
+    color: #D0D0D0; /* Цвет текста для блока времени */
+}
+
+/* Выбранное время */
+.react-datepicker__time--selected {
+    background-color: #FFD700; /* Желтый фон для выбранного времени */
+    color: #323131; /* Цвет текста для выбранного времени */
+}
+
+/* Стили для дней недели */
+.react-datepicker__day-names {
+    color: #D0D0D0; /* Цвет текста для дней недели */
+}
+
+.react-datepicker__day-name {
+    color: #D0D0D0; /* Цвет для отдельных дней недели */
+}
+
+/* Окно выбора времени */
+.react-datepicker__time-container {
+    border-top: 1px solid #555; /* Темная граница сверху для блока времени */
+}
+
+/* Условие для отображения, если нет доступного времени */
+.react-datepicker__time-list {
+    background-color: #444; /* Фон для списка времени */
+}
+
+/* Текущий день выделяется другим фоном */
+.react-datepicker__day--today {
+    background-color: #FFD700; /* Желтый фон для текущего дня */
+    color: #323131; /* Цвет текста для текущего дня */
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+    background-color: #FFD700;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+/* Подсветка дня при наведении */
+.react-datepicker__day:hover {
+    background-color: #FFD700; /* Желтый фон при наведении на день */
+    color: #323131; /* Цвет текста при наведении на день */
+}
+
+.react-datepicker__input-container{
+    width: 100%;
+}
+
+.react-datepicker-wrapper{
+    width: 100%;
+}

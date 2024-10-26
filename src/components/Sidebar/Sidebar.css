@@ -4,6 +4,7 @@
     flex-direction: column;
     padding: 20px;
     color: #fff;
+    z-index: 10;
 }
 
 .sidebar-item {
@@ -43,4 +44,12 @@
         gap: 10px;
         top: 0;
     }
+}
+
+.btn-sidebar{
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.btn-sidebar svg{
 }
