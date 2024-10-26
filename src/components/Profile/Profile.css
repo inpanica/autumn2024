@@ -5,13 +5,14 @@
 
 .icon-btnsvg {
     height: 25px;
-    width: auto;
+    width: 25px;
     transition: fill 0.3s;
 }
 
 .profile-photo{
     width: 75px;
-    height: auto;
+    height: 75px;
+    object-fit: cover;
     border-radius: 100px;
 }
 

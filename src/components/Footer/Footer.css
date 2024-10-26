@@ -1,0 +1,57 @@
+.footer{
+    background-color: #3d3d3d;
+    padding: 20px 20px 0 20px;
+    width: 100%;
+    box-shadow: 0px 5px 4px rgba(52, 51, 51, 0.2);
+}
+
+.footer_ctn{
+    padding-top: 0;
+    margin-bottom: 0;
+}
+
+.footer_ctn {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-github {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.main-link{
+    color: #fff;
+    text-decoration: none;
+    margin: 5px 0;
+    transition: color 0.3s ease;
+}
+
+.main-link:hover {
+    color: #ffcc00; /* Цвет при наведении */
+}
+
+.footer-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-column-wrapper{
+    justify-content: flex-start;
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #464646;
+    padding-bottom: 20px;
+}
+
+.footer-title{
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.copyr{
+    text-align: center;
+    margin-bottom: 10px;
+}

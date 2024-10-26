@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 import Card from '../Card/Card';
 import skeletonImage from '../../assets/sceleton.png';
 import Error from '../Error/Errror';
-import { loginUser, registerUser } from '../../actions';
+import { loginUser, registerUser, setUserPhoto } from '../../actions';
 import { saveTokens } from '../../jwt';
 
 
@@ -66,12 +66,14 @@ const RegistrationForm = ({authByToken}) => {
             const response = await registerUser(dataString, formData);
 
             if (response.status === 201) {
-                console.log(email, password);
                 const loginResponse = await loginUser(email, password);
-                console.log(loginResponse)
                 if (loginResponse.status == 201) {
                     saveTokens(loginResponse.data.refresh, loginResponse.data.access);
+                    const photoResponse = await setUserPhoto(formData);
+                    console.log(photoResponse);
+                    console.log(file);
                     authByToken();
+                    
                 }
             }
         }
