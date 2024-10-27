@@ -2,20 +2,24 @@
     display: flex;
     position: relative;
     align-items: center;
-    width: 100%; /* Занимает всю ширину родителя */
-    box-sizing: border-box; /* Учитывает отступы и границы в ширине */
+    width: 100%;
+    /* Занимает всю ширину родителя */
+    box-sizing: border-box;
+    /* Учитывает отступы и границы в ширине */
     border-bottom: 1px solid #464646;
     padding: 20px 0px;
-    padding-left: 50px;
     gap: 20px;
 }
 
 .leaderboard-photo {
-    width: 50px; /* Фиксированная ширина для изображения */
-    height: 50px; /* Фиксированная высота для изображения */
+    width: 50px;
+    /* Фиксированная ширина для изображения */
+    height: 50px;
+    /* Фиксированная высота для изображения */
     object-fit: cover;
     margin-right: 10px;
-    border-radius: 50%; /* Круглая форма */
+    border-radius: 50%;
+    /* Круглая форма */
 }
 
 .user-info-leader {
@@ -26,34 +30,40 @@
     margin-right: 50px;
 }
 
-.position{
+.position {
     z-index: 2;
     margin-bottom: 0;
 }
 
-.leaderboard-table{
+.leaderboard-table {
     margin-top: 50px;
 }
 
-.user-name-leader{
+.user-name-leader {
     margin-bottom: 0;
-    
+
 }
 
-.user-points{
+.user-points {
     margin-bottom: 0;
     display: flex;
     align-items: center;
 }
 
-.leader-fire{
+.leader-fire {
     width: 25px;
     position: absolute;
     z-index: 0;
-    left: 44px;
+    left: -5px;
     top: 20px;
 }
 
-.user_level-leaderboard{
+.user_level-leaderboard {
     margin-bottom: 0;
+}
+
+@media screen and (max-width: 400px){
+    .user-points {
+        display: none;
+    }
 }

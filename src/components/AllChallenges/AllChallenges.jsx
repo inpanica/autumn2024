@@ -62,14 +62,12 @@ const AllChallenges = ({ user, allChallenges, getChallenges }) => {
         sport: 'Спорт'
     };
 
-
-
     return (
         <div className="ctn">
             <SearchBar fullWidth={true} placeholder="Поиск..." value={search} onChange={(e) => { setSearch(e.target.value) }}></SearchBar>
             {
                 !(user.is_admin) &&
-                <Checkbox checked={checkInterest} onChange={(e) => { setCheckInterest(!checkInterest) }}>Учесть интересы</Checkbox>
+                <Checkbox checked={checkInterest} onChange={() => { setCheckInterest(!checkInterest) }}>Учесть интересы</Checkbox>
             }
             <Card maxWidth={1000}>
                 <h2 className="main-title">Все челленджи</h2>

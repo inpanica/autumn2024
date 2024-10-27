@@ -98,3 +98,19 @@ export const getAllUsers = async () => {
         return error.response;
     }
 };
+
+
+export const addAchivment = async (data) => {
+    try {
+        const response = await axios.post(`${config.levelService}/challenges/add_achievement`, data,{
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("access")}`,
+                Accept: "application/json",
+            },
+        });
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+};

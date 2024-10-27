@@ -1,3 +1,9 @@
 .details-point-container{
     margin-bottom: -5px;
 }
+
+.button-user-wrapper{
+    flex-wrap: wrap;
+    gap: 20px;
+    display: flex;
+}

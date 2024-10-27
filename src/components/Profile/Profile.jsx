@@ -3,14 +3,17 @@ import Card from '../Card/Card';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import Checkbox from '../CheckBox/CheckBox';
+import { Link } from 'react-router-dom';
 import { FaEdit, FaCheck, FaTimes, FaSignOutAlt } from 'react-icons/fa';
 import './Profile.css';
 import { config } from '../../config';
 import { removeTokens } from '../../jwt';
-import { getInterests, getLevel, patchInterests } from '../../levelActions';
+import { getInterests, getLevel, getUsersAcheivements, getUsersChallenges, patchInterests } from '../../levelActions';
 import Lemon from '../Lemon/Lemon';
 
 const Profile = ({ user, setUser, onUpdateProfile }) => {
+
+    const [achs, setAchs] = useState([]);
 
     const [isEditing, setIsEditing] = useState(false);
     const [name, setName] = useState(user.name);
@@ -20,6 +23,8 @@ const Profile = ({ user, setUser, onUpdateProfile }) => {
     const [password, setPassword] = useState('');
 
     const [level, setLevel] = useState(0);
+
+    const [myChallenges, setMyChallenges] = useState([])
 
     const [interests, setInterests] = useState({
         "sport": false,
@@ -34,16 +39,38 @@ const Profile = ({ user, setUser, onUpdateProfile }) => {
         "films": false
     })
 
+    const interestsValues = {
+        films: 'Кино',
+        tech: 'Технологии',
+        art: 'Рисование',
+        communication: 'Общение',
+        music: 'Музыка',
+        animals: 'Животные',
+        literature: 'Литература',
+        games: 'Игры',
+        cooking: 'Кулинария',
+        sport: 'Спорт'
+    };
+
+    const getMyAchs = async () => {
+        const response = await getUsersAcheivements();
+        if(response.status === 200){
+            setAchs(response.data)
+        }
+    }
+
     const handleCheckboxChange = async (interest) => {
         setInterests((prevInterests) => ({
             ...prevInterests,
             [interest]: !prevInterests[interest],
         }));
-        const response = await patchInterests({[interest]: !interests[interest]});
+        const response = await patchInterests({ [interest]: !interests[interest] });
     };
 
     useEffect(() => {
         getMyInterests();
+        getMyChallenges();
+        getMyAchs();
     }, [])
 
     useEffect(() => {
@@ -55,9 +82,18 @@ const Profile = ({ user, setUser, onUpdateProfile }) => {
         setLevel(response.data.level)
     }
 
+    const getMyChallenges = async () => {
+        const response = await getUsersChallenges();
+        if (response.status === 200) {
+            setMyChallenges(response.data);
+        }
+        console.log(response.data);
+
+    }
+
     const getMyInterests = async () => {
         const response = await getInterests();
-        if (response.status === 200){
+        if (response.status === 200) {
             setInterests(response.data[0]);
         }
     }
@@ -85,8 +121,9 @@ const Profile = ({ user, setUser, onUpdateProfile }) => {
                         <div className="user-info">
                             <img src={config.host + user.photo} alt="User" className="profile-photo" />
                             <div className="user-info_text">
-                                <p className="main-text">{name + ' ' + surname}</p>
-                                <p className="main-text">{email}</p>
+                                <p className="main-text">{user.name + ' ' + user.surname}</p>
+                                <p className="main-text">{user.email}</p>
+                                <p className="main-desc">{user.team}</p>
                             </div>
                         </div>
                         <div className="user-buttons">
@@ -197,9 +234,57 @@ const Profile = ({ user, setUser, onUpdateProfile }) => {
                 <p className="main-text user-points-wrapper">Счёт: {user.points}<Lemon></Lemon></p>
                 <p className="main-text no-margin">Уровень {level}</p>
                 <p className="main-desc">{config.roles[level]}</p>
+                {
+                    achs.map((a, index)=> {
+                        return <p key={index} className='main-text'>{index+1}. {a.title}</p>
+                    })
+                }
+
+            </Card>
+            <Card maxWidth={500}>
+                <h2 className="main-title">Активные челенджи</h2>
+                <div className="challenges-container">
+                    {myChallenges.map((challenge) => {
+                        if (challenge.accepted) {
+                            return (
+                                <Link key={challenge.id_ch} Link to={`/challenges/${challenge.id_ch}`
+                                } className='link-no-style' >
+                                    <Card className="challenge-card">
+                                        <h2 className="main-title">{challenge.name}</h2>
+                                        <p className="main-text">{challenge.desc}</p>
+                                        <p className="main-desc">{interestsValues[challenge.interest]}</p>
+                                        {
+                                            challenge.type === "steps" &&
+                                            <p className="main-text">Шаги, {challenge.steps}</p>
+                                        }
+                                        {
+                                            challenge.type === "sleep" &&
+                                            <p className="main-text">Сон, {challenge.sleep_millis / 3600000} часов</p>
+                                        }
+                                        <p className="main-text point-container">Награда за победу: {challenge.points}<Lemon></Lemon></p>
+                                        <div className="challenge-time-ctn">
+                                            <p className="main-text">Старт: </p>
+                                            <p className="main-desc">
+                                                {challenge.start.toString().split('+')[0]}
+                                            </p>
+                                        </div>
+                                        <div className="challenge-time-ctn">
+                                            <p className="main-text">Завершение: </p>
+                                            <p className="main-desc">
+                                                {challenge.end.toString().split('+')[0]}
+                                            </p>
+                                        </div>
+                                        <p className="main-text">Создатель: {challenge.creator}</p>
+                                    </Card>
+                                </Link>
+                            )
+                        }
+                    })}
+                </div>
             </Card>
             <Card maxWidth={500}>
                 <h2 className="main-title">Подключить Google Fit</h2>
+                <Button fullWidth={true}>Подключиться</Button>
             </Card>
         </div>
     );

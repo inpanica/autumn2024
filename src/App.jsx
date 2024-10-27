@@ -67,7 +67,7 @@ const App = () => {
                             <>
                                 {user.is_admin ? (
                                     <>
-                                        <Route path="/admin/challenge-requests" element={<ChallengeRequests user={user} allChallenges={allChallenges}/>} />
+                                        <Route path="/admin/challenge-requests" element={<ChallengeRequests user={user} allChallenges={allChallenges} getChallenges={getChallenges}/>} />
                                         <Route path="/admin/all-challenges" element={<AllChallenges user={user} allChallenges={allChallenges} getChallenges={getChallenges} />} />
                                         <Route path="/admin/add-admin" element={<AddAdmin />} />
                                         <Route path="*" element={<Navigate to="/admin/all-challenges" />} />
@@ -85,7 +85,7 @@ const App = () => {
                                     <Route
                                         key={challenge.ch_id}
                                         path={`/challenges/${challenge.id_ch}`}
-                                        element={<ChallengeDetails challenge={challenge} />}
+                                        element={<ChallengeDetails challenge={challenge} getChallenges={getChallenges} user={user} />}
                                     />
                                 ))}
                             </>

@@ -5,6 +5,7 @@ import './ChallengeRequests.css'
 import Lemon from '../Lemon/Lemon';
 import SearchBar from '../SearchBar/SearchBar';
 import Button from '../Button/Button';
+import { patchChallenge } from '../../levelActions';
 
 
 const ChallengeRequests = ({ user, allChallenges, getChallenges }) => {
@@ -34,10 +35,18 @@ const ChallengeRequests = ({ user, allChallenges, getChallenges }) => {
         sport: 'Спорт'
     };
 
-    const acceptFunc = (e, id) => {
+    const acceptFunc = async (e, id) => {
         e.preventDefault();
         console.log(id);
-        
+        const data = {
+            id_ch: id,
+            accepted: true
+        }
+        const response = await patchChallenge(data);
+        console.log(response);
+        if(response.status === 200){
+            getChallenges();
+        }
     }
 
     return (
