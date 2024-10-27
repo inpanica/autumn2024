@@ -108,6 +108,7 @@ const Personal = ({ user, setUser }) => {
                                         {goal.end.toString().split('+')[0]}
                                     </p>
                                 </div>
+                                <p className="main-text">{goal.status}</p>
                             </Card>
                         )
                     })}

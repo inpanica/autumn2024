@@ -22,7 +22,7 @@ const Leaderboard = ({ user, setUser, allUsers, setAllUsers }) => {
         <div className="ctn">
             <Card>
                 <h2 className="main-title">Таблица лидеров</h2>
-                <p className="main-text">В конце месяца лучшие три сотрудника получат призы</p>
+                <p className="main-text">В конце месяца три лучших сотрудника получат призы</p>
                 <div className="leaderboard-table">
                     {allUsers
                         .sort((a, b) => b.points - a.points)

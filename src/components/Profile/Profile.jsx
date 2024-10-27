@@ -12,7 +12,7 @@ import { getInterests, getLevel, getUsersAcheivements, getUsersChallenges, patch
 import Lemon from '../Lemon/Lemon';
 
 const Profile = ({ user, setUser, onUpdateProfile }) => {
-
+    
     const [achs, setAchs] = useState([]);
 
     const [isEditing, setIsEditing] = useState(false);
@@ -57,6 +57,10 @@ const Profile = ({ user, setUser, onUpdateProfile }) => {
         if(response.status === 200){
             setAchs(response.data)
         }
+    }
+
+    const connectGoogle = () =>{
+        
     }
 
     const handleCheckboxChange = async (interest) => {
@@ -284,7 +288,7 @@ const Profile = ({ user, setUser, onUpdateProfile }) => {
             </Card>
             <Card maxWidth={500}>
                 <h2 className="main-title">Подключить Google Fit</h2>
-                <Button fullWidth={true}>Подключиться</Button>
+                <Button onClick={connectGoogle} fullWidth={true}>Подключиться</Button>
             </Card>
         </div>
     );
